@@ -1,16 +1,16 @@
-
-#================================================
-import json
+# ================================================
 import os
 import sys
-import pandas as pd
+
 parent_folder = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # -------------------------------------------------------------
-# local import 1
+# local import
+# -------------------------------------------------------------
 path1 = os.path.join(parent_folder, 'data_reader')
 sys.path.append(path1)
 from forex_data_reader import ReadForexData
+
 # -------------------------------------------------------------
 
 
@@ -20,7 +20,7 @@ from forex_data_reader import ReadForexData
 # update mode to testing
 parameter_dict = {}
 parameter_dict['mode'] = 'trading'
-parameter_dict['instrument'] = 'GBP_USD' #'USD_JPY', 'USD_CAD', 'GBP_USD', 'USD_CHF', 'AUD_USD'
+parameter_dict['instrument'] = 'GBP_USD'  # 'USD_JPY', 'USD_CAD', 'GBP_USD', 'USD_CHF', 'AUD_USD'
 parameter_dict['granularity'] = "D"
 parameter_dict['candle_format'] = "midpoint"
 parameter_dict['date_range'] = 2000
@@ -30,6 +30,7 @@ parameter_dict['output_attributors_str'] = "instrument,date,openMid,closeMid,hig
 # data save path
 file_save_name = '{}.csv'.format(parameter_dict['instrument'])
 file_save_path = os.path.join(parent_folder, 'data', file_save_name)
+
 parameter_dict['file_path'] = file_save_path
 #
 # =========================================READING UP-TO-DATE-FOREX-DATA================================================
@@ -37,6 +38,7 @@ parameter_dict['file_path'] = file_save_path
 read_forex_data = ReadForexData(parameter_dict)
 read_forex_data.new_read_data_from_onanda()
 read_forex_data.write_forex_dict_to_file()
+
 
 # # --------------------------------------------panda test
 # df = pd.read_csv(file_save_path)
